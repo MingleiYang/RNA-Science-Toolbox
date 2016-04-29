@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>RNA Science Toolbox by fjossinet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">RNA Science Toolbox</h1>
+      <h2 class="project-tagline">A platform to do RNA science</h2>
+      <a href="https://github.com/fjossinet/RNA-Science-Toolbox" class="btn">View on GitHub</a>
+      <a href="https://github.com/fjossinet/RNA-Science-Toolbox/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/fjossinet/RNA-Science-Toolbox/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <p>The RNA Science Toolbox provides a Python API (PyRNA) to do RNA science. PyRNA allows you to:</p>
+
+<ul>
+<li>parse RNA data from "classical" file formats (PDB, CT, FASTA, VIENNA,...) and convert them into easy-to-use and easy-to-analyse data structures:
+
+<ul>
+<li><a href="http://pandas.pydata.org/pandas-docs/stable/dsintro.html">Pandas Series and DataFrames</a></li>
+<li>"PyRNA objects" (as defined in the module pyrna.features).</li>
+</ul>
+</li>
+<li>compute RNA data from RNA algorithms (see below for details) and convert them into Pandas data structures and PyRNA objects,</li>
+<li>recover RNA data from public databases (<a href="http://www.rcsb.org/pdb/home/home.do">PDB</a>, <a href="http://rfam.sanger.ac.uk">RFAM</a>,...) and convert them into Pandas data structures and PyRNA objects,</li>
+<li>deploy some functionalities as REST Web services.</li>
+</ul>
+
+<p>This project is related to the <a href="https://github.com/fjossinet/DockeRNA">DockeRNA project</a> which provides Docker images containing the RNA algorithms you may need.</p>
+
+<p>You can <a href="https://twitter.com/RnaSciToolbox">follow this project on twitter</a> to get updates as they happen.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>To use the RNA Science Toolbox, you will need to go through several steps. But don't be afraid, each step is really easy to follow. We do suppose that you are using either MacOSX or Linux.</p>
+
+<h3>
+<a id="python-environment" class="anchor" href="#python-environment" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Python environment</h3>
+
+<p>You need at first to have a Python distribution installed on your computer. If you don't have one, we recommend you a distribution like <a href="https://www.continuum.io/why-anaconda">Anaconda</a>.</p>
+
+<h3>
+<a id="fabric" class="anchor" href="#fabric" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Fabric</h3>
+
+<p>You also need the tool <a href="http://www.fabfile.org">Fabric</a>. If you're using the <a href="https://www.continuum.io/why-anaconda">Anaconda distribution</a>, you can get it by typing:</p>
+
+<pre><code>conda install fabric
+</code></pre>
+
+<h3>
+<a id="python-dependencies" class="anchor" href="#python-dependencies" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Python dependencies</h3>
+
+<p>Once done, download the RNA Science Toolbox and go into its directory. To install its Python dependencies, you can  use either the package manager conda (from the <a href="https://www.continuum.io/why-anaconda">Anaconda distribution</a>) or pip. To use conda, type:</p>
+
+<pre><code>fab
+</code></pre>
+
+<p>To use pip, type:</p>
+
+<pre><code>fab install:manager=pip
+</code></pre>
+
+<h3>
+<a id="docker" class="anchor" href="#docker" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Docker</h3>
+
+<p>To install the RNA algorithms, you need first to get the tool Docker. You will find all the details <a href="https://docs.docker.com/engine/installation/">here</a>.</p>
+
+<h3>
+<a id="rna-algorithms" class="anchor" href="#rna-algorithms" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>RNA algorithms</h3>
+
+<p>Each Docker image available contains several algorithms:</p>
+
+<ul>
+<li>
+<a href="https://hub.docker.com/r/fjossinet/assemble2/">fjossinet/assemble2</a>: provides <a href="http://ndbserver.rutgers.edu/ndbmodule/services/download/rnaview.html">RNAVIEW</a>, <a href="https://www.tbi.univie.ac.at/RNA/">Vienna RNA package</a>, <a href="http://rth.dk/resources/foldalign/">foldalign</a>, <a href="http://rna.informatik.uni-freiburg.de/LocARNA/">LocARNA</a>
+</li>
+<li>
+<a href="https://hub.docker.com/r/fjossinet/rnaseq/">fjossinet/rnaseq</a>: provides <a href="http://samtools.sourceforge.net">SAMtools</a>, <a href="https://ccb.jhu.edu/software/tophat/">Tophat2</a>, <a href="http://bowtie-bio.sourceforge.net/bowtie2/index.shtml">Bowtie2</a>
+</li>
+</ul>
+
+<p>Go to their Web page for more details about their installation and usage.</p>
+
+<h3>
+<a id="configure-your-path" class="anchor" href="#configure-your-path" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configure your PATH</h3>
+
+<p>In the configuration file of your shell (.bashrc, .zshrc,...), add the folowing lines:</p>
+
+<pre><code>export TOOLBOX=THE_PATH_TO_YOUR_RNA_SCIENCE_TOOLBOX
+export PYTHONPATH=$PYTHONPATH:$TOOLBOX
+export PATH=$PATH:$TOOLBOX/files/scripts/python:$PATH
+</code></pre>
+
+<p>Restart your shell and type:</p>
+
+<pre><code>pyrna_tests.py
+</code></pre>
+
+<p>Your RNA Science Toolbox is fully configured if you get something like:</p>
+
+<pre>
+Recovering entry 1EHZ from Protein Databank...
+
+## 3D annotation ##
+
+List of base-pairs computed with RNAVIEW:
+
+edge1 edge2 orientation  pos1  pos2
+0      (     )           c     1    72
+1      (     )           c     2    71
+2      (     )           c     3    70
+[...]
+</pre>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/fjossinet/RNA-Science-Toolbox">RNA Science Toolbox</a> is maintained by <a href="https://github.com/fjossinet">fjossinet</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
